@@ -1,10 +1,8 @@
-import Directory from './components/directory/directory.component';
-import { categories } from './assets/categories';
-
+import Home from "./routes/Home/home.component";
 const App = () => {
   
   return (
-    <Directory categories={categories}/>
+    <Home/>
   );
 } 
 
