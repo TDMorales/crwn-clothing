@@ -15,10 +15,10 @@ const NavigationBar = () => {
             SHOP
           </Link>
           <Link className="nav-link" to="">
-            PROFILE
+            CONTACT
           </Link>
-          <Link className="nav-link" to="">
-            CART
+          <Link className="nav-link" to="sign-in">
+            SIGN IN
           </Link>
         </div>
       </div>
