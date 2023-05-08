@@ -18,7 +18,6 @@ const SignIn = () => {
     <div>
       <h1>Sign In Page</h1>
       <button onClick={logGoogleUser}>Sign In With Google</button>
-
       <SignUpForm/>
     </div>
   );
