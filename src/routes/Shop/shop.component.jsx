@@ -1,11 +1,16 @@
 import React from "react";
+import SHOP_DATA from '../../assets/shop-data.json';
 
-function Shop() {
+const Shop = () => {
   return (
     <div>
-      <h1>SHOP</h1>
+      {SHOP_DATA.map(({ id, name }) => (
+        <div key={id}>
+          <h1>{name} </h1>
+        </div>
+      ))}
     </div>
-  );
+  )
 }
 
-export default Shop;
+export default Shop
