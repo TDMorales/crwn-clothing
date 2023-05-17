@@ -3,6 +3,7 @@ import NavigationBar from "./routes/NavigationBar/navigationBar.component";
 import Home from "./routes/Home/home.component";
 import Shop from "./routes/Shop/shop.component";
 import Authentication from "./routes/Authentication/authentication.component";
+
 const App = () => {
   return (
     <Routes>
