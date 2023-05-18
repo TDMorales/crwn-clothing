@@ -14,7 +14,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import "./navigation.styles.scss";
 
 const NavigationBar = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
   return (
     <Fragment>
