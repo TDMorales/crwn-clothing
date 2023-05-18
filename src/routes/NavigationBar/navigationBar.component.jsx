@@ -11,37 +11,36 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
-import "./navigation.styles.scss";
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLinksContainer,
+  NavLink,
+} from "./navigation.styles.jsx";
 
 const NavigationBar = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
   return (
     <Fragment>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <CrwnLogo className="logo"></CrwnLogo>
-        </Link>
-        <div className="nav-links-container">
-          <Link className="nav-link" to="/shop">
-            SHOP
-          </Link>
-          <Link className="nav-link" to="">
-            CONTACT
-          </Link>
+        </LogoContainer>
+        <NavLinksContainer>
+          <NavLink to="/shop">SHOP</NavLink>
+          <NavLink to="">CONTACT</NavLink>
           {currentUser ? (
-            <Link className="nav-link" onClick={signOutUser}>
+            <NavLink as="span" onClick={signOutUser}>
               SIGN OUT
-            </Link>
+            </NavLink>
           ) : (
-            <Link className="nav-link" to="auth">
-              SIGN IN
-            </Link>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
-          <CartIcon/>
-          {isCartOpen && <CartDropdown /> }
-        </div>
-      </div>
+          <CartIcon />
+          {isCartOpen && <CartDropdown />}
+        </NavLinksContainer>
+      </NavigationContainer>
       <Outlet />
     </Fragment>
   );
