@@ -1,4 +1,4 @@
-import { React, Fragment, useContext } from "react";
+import { React, Fragment, useContext, useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
 
 import { ReactComponent as CrwnLogo } from "../../assets/crown-logo.svg";
@@ -21,11 +21,16 @@ import {
 const NavigationBar = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
+
   return (
     <Fragment>
       <NavigationContainer>
         <LogoContainer to="/">
-          <CrwnLogo className="logo"></CrwnLogo>
+          <CrwnLogo className="logo" />
+          {currentUser ?
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <p>Welcome, {currentUser.displayName}</p>
+            </div> : <div />}
         </LogoContainer>
         <NavLinksContainer>
           <NavLink to="/shop">SHOP</NavLink>

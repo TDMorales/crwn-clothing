@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { useContext, useState } from "react";
 import FormInput from "../../components/form-input/form-input.component";
 import Button, {
   BUTTON_TYPE_CLASSES,
@@ -8,6 +8,7 @@ import {
   createUserDocFromAuth,
   signInUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
+import { useNavigate } from "react-router-dom";
 
 import "./sign-in-form.styles.scss";
 const defaultFormFields = {
@@ -18,9 +19,11 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
+    navigate("/shop");
   };
 
   const handleChange = (e) => {
@@ -59,6 +62,7 @@ const SignInForm = () => {
           label="Email"
           type="email"
           name="email"
+          autocomplete="email"
           value={email}
           onChange={handleChange}
           required
@@ -67,6 +71,7 @@ const SignInForm = () => {
           label="Password"
           type="password"
           name="password"
+          autocomplete="current-password"
           value={password}
           onChange={handleChange}
           required

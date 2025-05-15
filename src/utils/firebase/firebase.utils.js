@@ -8,6 +8,8 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateCurrentUser,
+  updateProfile,
 } from "firebase/auth";
 import {
   getFirestore,
@@ -84,7 +86,6 @@ export const createUserDocFromAuth = async (
   const userDocRef = doc(db, "users", userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot.exists());
 
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
@@ -104,14 +105,35 @@ export const createUserDocFromAuth = async (
   return userDocRef;
 };
 
-export const createAuthUserWithEmailAndPassword = async (email, password) => {
+export const updateUserDetails = async (additionalInformation = {}) => {
+  if (!auth.currentUser) return;
+
+  try {
+    return await updateProfile(auth.currentUser, { ...additionalInformation })
+  } catch (err) {
+    window.alert(err)
+  }
+
+}
+
+export const createAuthUserWithEmailAndPassword = async (email, password, userName) => {
   if (!email || !password) return;
-  return await createUserWithEmailAndPassword(auth, email, password);
+  try {
+    await createUserWithEmailAndPassword(auth, email, password);
+    return await updateUserDetails({ displayName: userName })
+  } catch (err) {
+    console.log(err)
+    window.alert(`There was an error creating user: ${err}`)
+  }
 };
 
 export const signInUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-  return await signInWithEmailAndPassword(auth, email, password);
+  try {
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (err) {
+    window.alert(`Could not sign in with credentials: ${err}`)
+  }
 };
 
 export const signOutUser = async () => signOut(auth);

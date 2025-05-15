@@ -7,11 +7,11 @@ const CategoriesPreview = () => {
   const { categoriesMap } = useContext(CategoriesContext);
   return (
     <Fragment>
-      {Object.keys(categoriesMap).map((title) => {
+      {Object.keys(categoriesMap).map((title, index) => {
         const products = categoriesMap[title];
         return (
-          <Link to={`${title}`}>
-            <CategoryPreview key={title} title={title} products={products} />
+          <Link to={`${title}`} key={`${title}-${index}`} >
+            <CategoryPreview title={title} products={products} />
           </Link>
         );
       })}
