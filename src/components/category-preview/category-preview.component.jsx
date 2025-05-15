@@ -8,7 +8,7 @@ const CategoryPreview = ({ title, products }) => {
       <h2>
         <span className="title">{title.toUpperCase()}</span>
       </h2>
-      <div class="preview">
+      <div className="preview">
         {products
           .filter((_, idx) => idx < 4)
           .map((product) => (

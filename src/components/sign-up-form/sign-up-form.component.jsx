@@ -1,8 +1,9 @@
 import { React, useState } from 'react'
 import './sign-up-form.styles.scss'
-import { createAuthUserWithEmailAndPassword, createUserDocFromAuth } from '../../utils/firebase/firebase.utils'
+import { createAuthUserWithEmailAndPassword, updateUserDetails } from '../../utils/firebase/firebase.utils'
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.components';
+import { useNavigate } from "react-router-dom";
 
 const defaultFormFields = {
   displayName: '',
@@ -15,9 +16,11 @@ const SignUpForm = () => {
   // const [visible, setVisible] = useState(false) 
   const [formFields, setFormFields] = useState(defaultFormFields)
   const { displayName, email, password, confirmPassword } = formFields;
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields)
+    navigate("/shop");
   }
 
   const handleChange = (e) => {
@@ -32,10 +35,7 @@ const SignUpForm = () => {
       return;
     }
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(email, password)
-
-      await createUserDocFromAuth(user, { displayName })
-
+      await createAuthUserWithEmailAndPassword(email, password, displayName);
       resetFormFields();
     } catch (e) {
       if (e.code === 'auth/email-already-in-use') {
